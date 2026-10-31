@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "description": "Proper, LM-independent priors. Rules must match every thawed XSPEC parameter exactly once.",
+  "profiles": {
+    "standard": {
+      "rules": [
+        {"component":"constant","name":"factor","data_group":2,"distribution":"uniform","min":0.9,"max":1.1},
+        {"component":"plabs","name":"coef","data_group":2,"distribution":"uniform","min":0.9,"max":1.1},
+        {"component":"plabs","name":"index","data_group":2,"distribution":"uniform","min":-0.05,"max":0.05},
+        {"component":"zxipcf","name":"Nh","distribution":"loguniform","min":0.05,"max":50.0},
+        {"component":"zxipcf","name":"log_xi","distribution":"uniform","min":0.0,"max":5.0},
+        {"component":"zxipcf","name":"CvrFract","distribution":"uniform","min":0.0,"max":1.0},
+        {"component":"thcomp","name":"Gamma_tau","distribution":"uniform","min":1.2,"max":3.4},
+        {"component":"thcomp","name":"kT_e","distribution":"loguniform","min":20.0,"max":300.0},
+        {"component":"thcomp","name":"cov_frac","distribution":"uniform","min":0.0,"max":1.0},
+        {"component":"diskbb","name":"Tin","distribution":"uniform","min":0.1,"max":2.0},
+        {"component":"diskbb","name":"norm","distribution":"loguniform","min":0.01,"max":1000000000000.0},
+        {"component":"relxillCp","name":"Rin","distribution":"uniform","min":-30.0,"max":-1.0},
+        {"component":"relxillCp","name":"Index1","distribution":"uniform","min":2.0,"max":9.0},
+        {"component":"relxillCp","name":"gamma","distribution":"uniform","min":1.2,"max":3.4},
+        {"component":"relxillCp","name":"logxi","distribution":"uniform","min":0.0,"max":4.7},
+        {"component":"relxillCp","name":"logN","distribution":"uniform","min":15.0,"max":20.0},
+        {"component":"relxillCp","name":"Afe","distribution":"uniform","min":0.5,"max":10.0},
+        {"component":"relxillCp","name":"kTe","distribution":"loguniform","min":20.0,"max":300.0},
+        {"component":"relxillCp","name":"refl_frac","distribution":"uniform","min":0.0,"max":5.0},
+        {"component":"relxillCp","name":"norm","distribution":"loguniform","min":1e-08,"max":1000.0},
+        {"component":"zgauss","name":"norm","distribution":"uniform","min":0.0,"max":0.01}
+      ]
+    },
+    "compps_reflkerr": {
+      "description": "The standard rules plus compPS and reflkerrDG; ranges match the corresponding thcomp and relxillCp rules.",
+      "inherits": "standard",
+      "add": [
+        {"component":"compPS","name":"kTe","distribution":"loguniform","min":20.0,"max":300.0},
+        {"component":"compPS","name":"tau_y","distribution":"uniform","min":0.05,"max":3.0},
+        {"component":"compPS","name":"norm","distribution":"loguniform","min":0.01,"max":1000000000000.0},
+        {"component":"reflkerrDG","name":"Rin","distribution":"uniform","min":-30.0,"max":-1.0},
+        {"component":"reflkerrDG","name":"Index1","distribution":"uniform","min":2.0,"max":9.0},
+        {"component":"reflkerrDG","name":"gamma","distribution":"uniform","min":1.2,"max":3.4},
+        {"component":"reflkerrDG","name":"logxi","distribution":"uniform","min":0.0,"max":4.7},
+        {"component":"reflkerrDG","name":"logN","distribution":"uniform","min":15.0,"max":19.0},
+        {"component":"reflkerrDG","name":"Afe","distribution":"uniform","min":0.5,"max":10.0},
+        {"component":"reflkerrDG","name":"kTe","distribution":"loguniform","min":20.0,"max":300.0},
+        {"component":"reflkerrDG","name":"rel_refl","distribution":"uniform","min":0.0,"max":5.0},
+        {"component":"reflkerrDG","name":"norm","distribution":"loguniform","min":1e-08,"max":1000.0}
+      ]
+    },
+    "joint_nicer": {
+      "inherits": "standard",
+      "add": [
+        {"component":"TBabs","name":"nH","distribution":"uniform","min":0.1,"max":2.0},
+        {"component":"constant","name":"factor","data_group":3,"distribution":"uniform","min":0.8,"max":1.2}
+      ]
+    }
+  }
+}
